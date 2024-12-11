@@ -30,6 +30,8 @@ readFiles()
 
 //callback hell
 
+console.log('start')
+
 readFile('./subfolder/myfiles.txt','utf-8',(err,data)=> { 
     if (err) {
         console.log(err) 
@@ -48,7 +50,6 @@ readFile('./subfolder/myfiles.txt','utf-8',(err,data)=> {
             console.log(err)
             return
         }
-        console.log('file written succesfully ')
 
 
     })
@@ -57,5 +58,5 @@ readFile('./subfolder/myfiles.txt','utf-8',(err,data)=> {
 })
 
 
-
+console.log('done and passed to next task')
 

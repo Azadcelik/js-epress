@@ -8,3 +8,8 @@ const currentOs = {
     totalMemories : os.totalmem(),
     freeMemory: os.freemem()
 }
+
+const loading = require('lodash')
+const newArr = [1,[2,[3,[4,[5,[6]]]]]]
+
+console.log(loading.flatMapDeep(newArr))
