@@ -1,20 +1,33 @@
 // const readingFile = require('fs');
 
 // for (let i = 0; i < 1000; i++) { 
-//     readingFile.writeFileSync('./subfolder/myFile',`this is my 1000k file ${i}\n `, {flag: 'a'} )
+//     readingFile.writeFileSync('./subfolder/big.txt',`this is my 1000k file ${i}\n `, {flag: 'a'} )
 // }
 
-const EventEmitter = require('events');
 
-// console.log(EventEmitter)
+// const { createReadStream } =  require('fs');
+// const stream = createReadStream('./subfolder/big.txt',{highWaterMark: 9000,encoding: 'utf-8'});
+// stream.on('data',(chunk) => console.log(chunk));
 
-const customerEmitter = new EventEmitter();
+// stream.on('error',(err) => console.log(err))
 
-customerEmitter.on('response',(name,age) => { 
-    console.log(`data recieved ${name} with age of ${age}`)
-})
+const http = require('http');
+const fs = require('fs');
 
-customerEmitter.on('response',(name) => { 
-    console.log(`some other logic mr ${name}`)
-})
-customerEmitter.emit('response','azad',33)
+
+http.createServer(function (req,res) { 
+    //without chunk if you check network you will see the number of size 
+    // const text = fs.readFileSync('./subfolder/big.txt','utf-8');
+    // res.end(text);
+
+    // with stream when you check size you would only see chunked 
+    const fileStream = fs.createReadStream('./subfolder/big.txt','utf-8')
+
+    fileStream.on('open', () => { 
+        fileStream.pipe(res);
+    })
+
+    fileStream.on('error',(err) => {
+        res.end(err)
+    })
+}).listen(5005)
