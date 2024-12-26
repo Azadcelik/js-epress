@@ -31,3 +31,5 @@ http.createServer(function (req,res) {
         res.end(err)
     })
 }).listen(5005)
+
+console.log(require.cache)
