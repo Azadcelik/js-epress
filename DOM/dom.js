@@ -17,7 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // console.log(document.forms)
     // console.log(document.links)
 
-
+    // GETELEMENTBYID => select all tag with same id name
+    // let firstText = document.getElementById('labelName')
+    // firstText.textContent = "Mysurname"
+    // console.log(firstText.innerText);
+    // console.log(firstText.textContent);
+    // console.log(firstText.innerHTML);
+    // firstText.style.color = "red"
 
 
 });
