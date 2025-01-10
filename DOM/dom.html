@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+  /* Center the form on the page */
+  text-align: center;
+}
+
+form {
+  display: inline-block;
+  /* Form outline */
+  padding: 1em;
+  border: 1px solid #ccc;
+  border-radius: 1em;
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+label {
+  /* Uniform size & alignment */
+  display: inline-block;
+  min-width: 90px;
+  text-align: right;
+}
+
+input,
+textarea {
+  /* To make sure that all text fields have the same font settings
+     By default, text areas have a monospace font */
+  font: 1em sans-serif;
+  /* Uniform text field size */
+  width: 300px;
+  box-sizing: border-box;
+  /* Match form field borders */
+  border: 1px solid #999;
+}
+
+input:focus,
+textarea:focus {
+  /* Set the outline width and style */
+  outline-style: solid;
+  /* To give a little highlight on active elements */
+  outline-color: #000;
+}
+
+textarea {
+  /* Align multiline text fields with their labels */
+  vertical-align: top;
+  /* Provide space to type some text */
+  height: 5em;
+}
+
+.button {
+  /* Align buttons with the text fields */
+  padding-left: 90px; /* same size as the label elements */
+}
+
+button {
+  /* This extra margin represent roughly the same space as the space
+     between the labels and their text fields */
+  margin-left: 0.5em;
+}
+
+    </style>
+</head>
+<body>
+    <form id="my-form"  enctype="application/x-www-form-urlencoded">
+        <p class="first-paragraph"> 
+            <label for="name" id="labelName">Name:</label>
+            <input type="text" id="name" name="user_name">
+        </p>
+        <!-- <li id="independent-li">Random li</li>
+        <p>
+            <label for="surname">Surname: </label>
+            <input type="text" id="surname" name="surname">
+        </p>
+        <p>
+            <label for="age">Age: </label>
+            <input type="text" name="age" id="age">
+        </p> -->
+        <input type="submit" value="Submit form">
+    </form>
+    <ul class="unordered"> 
+      <li  class="list-items">this is first list</li>
+      <li  class="list-items">this is second list</li>
+      <li  class="list-items">this is third list</li>
+    </ul>
+      <!-- <p>This is paragraph inside list</p>
+    <button style="color: red;" id="button-id" onclick="clickedButton()" >CLick here</button>
+      <button id="button-id">
+        Click HERE
+      </button> -->
+      <!-- <div style="width: 1250px; height: 500px; background-color: lightgray;"></div> -->
+    <script src="./dom.js"></script>
+</body>
+</html>
