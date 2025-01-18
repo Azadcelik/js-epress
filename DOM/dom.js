@@ -72,4 +72,52 @@ document.addEventListener('DOMContentLoaded', () => {
       
     // }
 
+
+
+
+
+    //TRAVERSING DOM
+
+    //parentNode => not suggested because of white space issue
+    // let list3 = document.querySelector('#independent-li');
+    // console.log(list.parentNode)
+    // list.parentNode.style.backgroundColor = "pink";
+    // console.log(list.parentNode.parentNode.parentNode.parentNode);
+
+    //Parent ELement 
+    // let list4 = document.querySelectorAll('.list-items');
+    // console.log(list4)
+    // console.log(list4.forEach(item => { 
+    //   console.log(item.parentElement.parentElement)
+    // }))
+
+
+    //CHILD NODES => not suggested due to white space issue
+    // let unorderedList = document.querySelector('ul');
+    // console.log(unorderedList.childNodes)
+  
+    // let firstPara = document.querySelector('.first-paragraph');
+    // console.log(firstPara.childNodes)
+
+
+    //CHilDREN => without white space issue. more recommended but returning HTML Collection not nodeList
+    // let unorderedList1 = document.querySelector('ul');
+    // console.log(unorderedList1.children)
+    // let firstPara1 = document.querySelector('.first-paragraph');
+    // console.log(firstPara1.children)
+
+    //firstChild => whitesopace issue
+    // console.log(firstPara1.firstChild)
+
+    //firwstElementChild => suggested
+    // console.log(firstPara1.firstElementChild)
+
+    //same for lastchild and lastElementChild 
+
+
+    //same for nextSibling (notSuggested) but nextElementSibling(more suggested)
+    //same for previousSibling which is not suggested but previousElementSibling which is sugges-
+    //ted those differences are because of white space issues
+
+
 });
