@@ -120,4 +120,76 @@ document.addEventListener('DOMContentLoaded', () => {
     //ted those differences are because of white space issues
 
 
+
+
+
+
+
+    // //create element 
+    // let divElement = document.createElement('div');
+    // //add id to the element
+    // divElement.id = "hello";
+    // //add classname to the element
+    // divElement.className = "hello 1";
+
+    // //add text 
+    // divElement.innerText = "first created element";
+
+  
+    // let formVar = document.querySelector('form #independent-li');
+    // //append to the any html element   
+    // formVar.appendChild(divElement);
+    // console.log(formVar.children)
+
+
+    //EVENTLISTENER
+
+
+    
+    // document.querySelector('button').addEventListener("click", function () { 
+    //   console.log('this is clicked add eventlisner callback function')
+    // })
+
+    // let buttono = document.querySelector('button');
+
+    // buttono.className = "button-class";
+
+    // buttono.addEventListener('click',passingReference);
+
+    // function passingReference (e) { 
+    //   let listItems = document.querySelector('#independent-li')
+    //   listItems.style.backgroundColor =  "red"
+
+    //   console.log(e);
+    //   console.log(e.target);
+    //   console.log(e.target.id);
+    //   console.log(e.target.className);
+    //   console.log(e.type);
+
+    //   //client is position of window 
+    //   console.log(e.clientX);
+    //   console.log(e.clientY);
+
+    //   //this is actual element position
+    //   console.log(e.offsetX);
+    //   console.log(e.offsetY);
+
+      
+    // }
+
+    // let maniPulationDom = document.querySelector('button+div');
+    // console.log(maniPulationDom)
+
+    // maniPulationDom.addEventListener('mousemove',mouseManipulation)
+
+
+    // function mouseManipulation(e) { 
+    // console.log(e.type);
+    // let x = e.offsetX;
+    // let y = e.offsetY;
+    // maniPulationDom.style.backgroundColor = `rgb(${x},${y},49)`;  
+
+
+
+
 });
