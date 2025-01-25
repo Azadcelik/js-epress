@@ -1,4 +1,4 @@
-const dataObject = [{ 
+const userArray = [{ 
     name: "azad",
     age: 32,
     education : "bachelors",
@@ -11,4 +11,4 @@ const dataObject = [{
 
 
 
-module.exports = { dataObject };
+module.exports = { userArray };
