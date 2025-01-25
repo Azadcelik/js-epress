@@ -78,3 +78,44 @@ app.put('/api/user/:id',(req,res) => {
 
 })
 
+
+
+
+//updating portion of the entire object not all
+app.patch('/api/user/:id',(req,res) => { 
+    let {params: {id} ,body} = req;
+    id = Number(id)
+
+    if (isNaN(id)) return res.sendStatus(404);
+
+    const updatedUser = userArray.findIndex((user) => user.id === id);
+    if (updatedUser === -1) return res.sendStatus(404)
+
+
+    //work more on spread operator to understand how does this syntax overwriting 
+    userArray[updatedUser] = {...userArray[updatedUser],...body};
+
+    return res.sendStatus(200)
+
+})
+
+
+app.delete('/api/user/:id',(req,res) => { 
+    let {id} = req.params;
+    id = Number(id)
+
+    if (isNaN(id)) return res.statusCode(400);
+    
+    //find index of deleted element of array 
+
+    const userDeleteIndex = userArray.findIndex(user => user.id === id);
+    console.log(userDeleteIndex);
+
+    userArray.splice(id,1)
+    return res.sendStatus(200)
+
+
+} )
+
+app.listen('8001', ()=> console.log('listening port at the 8000'))
+
