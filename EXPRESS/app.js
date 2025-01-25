@@ -45,3 +45,36 @@ app.get('/api/user', (req,res) => {
 
 
 })
+
+
+
+//POST REQUEST TO ADD DATA TO THE SERVER
+app.post('/api/user',(req,res) => { 
+    const body = req.body;
+    
+    //find the last index of the array and add plus one for the adding to the end of the array
+    const newUser = {id: userArray[userArray.length - 1].id + 1,...body}
+    userArray.push(newUser)
+
+    //finally send 201 status code as succesfully added 
+    res.send.status(201).send(newUser)
+
+})
+
+//you should update entier portion when using put 
+//do not omit any objects property
+app.put('/api/user/:id',(req,res) => { 
+    let {params: {id} ,body} = req;
+    id = Number(id)
+
+    if (isNaN(id)) return res.sendStatus(404);
+
+    const updatedUser = userArray.findIndex((user) => user.id === id);
+    if (updatedUser === -1) return res.sendStatus(404)
+
+    userArray[updatedUser] = {id: id, ...body};
+
+    return res.sendStatus(200)
+
+})
+
