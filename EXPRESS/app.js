@@ -1,6 +1,26 @@
 const express = require('express');
 const app = express();
 const { userArray } = require('./data')
+const expressValidator = require('express-validator');
+const {validationHandler} = require('./validation');
+const { isArray } = require('lodash');
+// console.log(validationHandler)
+
+// console.log(expressValidator)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // app.use(express.static('./publico')); // built in middleware
 
@@ -36,7 +56,11 @@ app.get('/',(req,res) => {
 })
 
 //route parameters using
-app.get('/api/user/:id',(req,res) => { 
+app.get('/api/user/:id',validationHandler,(req,res) => { 
+    const error = expressValidator.validationResult(req)
+    if (!error.isEmpty()) {
+        return res.send(error)
+    }
     let {id} = req.params;
     id = Number(id);
     //if params not a valid number return bad request 
@@ -56,13 +80,12 @@ app.get('/api/user/:id',(req,res) => {
 //query Parameters for filtering values 
 app.get('/api/user', (req,res) => { 
     const {filter,value} = req.query;
-    
+    console.log(filter,value)
     //filter based on name and value or whatever you want based on user input
     if (filter && value) { 
        const filteredQuery =  userArray.filter((user) => user[filter].includes(value))
         return  res.send(filteredQuery)
     }
-    
     res.send(userArray)
 
 
@@ -71,15 +94,22 @@ app.get('/api/user', (req,res) => {
 
 
 //POST REQUEST TO ADD DATA TO THE SERVER
-app.post('/api/user',(req,res) => { 
+app.post('/api/user',validationHandler,(req,res) => { 
     const body = req.body;
     
+    const errorValidation = expressValidator.validationResult(req);
+    if (!errorValidation.isEmpty()) { 
+       return res.status(404).send({message : errorValidation.errors});
+    }
+
+
+
     //find the last index of the array and add plus one for the adding to the end of the array
     const newUser = {id: userArray[userArray.length - 1].id + 1,...body}
     userArray.push(newUser)
 
     //finally send 201 status code as succesfully added 
-    res.send.status(201).send(newUser)
+    res.status(201).send(newUser)
 
 })
 
