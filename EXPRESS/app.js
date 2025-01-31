@@ -1,11 +1,33 @@
 const express = require('express');
 const app = express();
-const {userArray} = require('./data')
-// app.use(express.static('./publico'));
-app.use(express.urlencoded({extended: true}));
-app.use(express.json());
+const { userArray } = require('./data')
 
+// app.use(express.static('./publico')); // built in middleware
 
+app.use(express.urlencoded({extended: true}));//built in middleware
+
+app.use(express.json());// built in middleware
+
+// Application-level middleware
+app.use((req, res, next) => {
+    console.log('Request URL:', req.originalUrl, 'request METHOD: ',req.method);
+    next();
+});
+
+// middleware using in express js
+const handleParsedId = (req,res,next) =>  { 
+    let {params: {id}} = req;
+    id = Number(id)
+
+    if (isNaN(id)) return res.sendStatus(404);
+
+    const updatedUser = userArray.findIndex((user) => user.id === id);
+    if (updatedUser === -1) return res.sendStatus(404)
+
+    req.updatedUser= updatedUser;
+
+    next()
+}
 
 //get request to retirieve data from server
 app.get('/',(req,res) => { 
@@ -63,33 +85,22 @@ app.post('/api/user',(req,res) => {
 
 //you should update entier portion when using put 
 //do not omit any objects property
-app.put('/api/user/:id',(req,res) => { 
-    let {params: {id} ,body} = req;
-    id = Number(id)
+app.put('/api/user/:id',handleParsedId,(req,res) => { 
+    let {updatedUser,body} = req;
+    console.log(updatedUser)
 
-    if (isNaN(id)) return res.sendStatus(404);
-
-    const updatedUser = userArray.findIndex((user) => user.id === id);
-    if (updatedUser === -1) return res.sendStatus(404)
-
-    userArray[updatedUser] = {id: id, ...body};
+    userArray[updatedUser] = {id: userArray[updatedUser].id, ...body};
+    console.log(updatedUser.id)
 
     return res.sendStatus(200)
 
 })
 
 
-
-
 //updating portion of the entire object not all
-app.patch('/api/user/:id',(req,res) => { 
-    let {params: {id} ,body} = req;
-    id = Number(id)
-
-    if (isNaN(id)) return res.sendStatus(404);
-
-    const updatedUser = userArray.findIndex((user) => user.id === id);
-    if (updatedUser === -1) return res.sendStatus(404)
+app.patch('/api/user/:id',handleParsedId,(req,res) => { 
+    let {updatedUser ,body} = req;
+    
 
 
     //work more on spread operator to understand how does this syntax overwriting 
@@ -118,4 +129,3 @@ app.delete('/api/user/:id',(req,res) => {
 } )
 
 app.listen('8001', ()=> console.log('listening port at the 8000'))
-
