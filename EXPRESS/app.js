@@ -4,35 +4,24 @@ const { userArray } = require('./data')
 const expressValidator = require('express-validator');
 const {validationHandler} = require('./validation');
 const { isArray } = require('lodash');
-// console.log(validationHandler)
-
-// console.log(expressValidator)
-
+const userRouter = require('./router/user.js')
+const parseCookie = require('cookie-parser');
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+app.use((req, res, next) => {
+    console.log('Request URL:', req.originalUrl, 'request METHOD: ',req.method);
+    next();
+});
 // app.use(express.static('./publico')); // built in middleware
 
 app.use(express.urlencoded({extended: true}));//built in middleware
 
 app.use(express.json());// built in middleware
+app.use(parseCookie());
+app.use('/api/user',userRouter)
 
-// Application-level middleware
-app.use((req, res, next) => {
-    console.log('Request URL:', req.originalUrl, 'request METHOD: ',req.method);
-    next();
-});
+// // Application-level middleware
 
 // middleware using in express js
 const handleParsedId = (req,res,next) =>  { 
@@ -49,10 +38,12 @@ const handleParsedId = (req,res,next) =>  {
     next()
 }
 
-//get request to retirieve data from server
+// get request to retirieve data from server
 app.get('/',(req,res) => { 
+
     
     res.send(userArray)
+
 })
 
 //route parameters using
@@ -78,18 +69,7 @@ app.get('/api/user/:id',validationHandler,(req,res) => {
 
 
 //query Parameters for filtering values 
-app.get('/api/user', (req,res) => { 
-    const {filter,value} = req.query;
-    console.log(filter,value)
-    //filter based on name and value or whatever you want based on user input
-    if (filter && value) { 
-       const filteredQuery =  userArray.filter((user) => user[filter].includes(value))
-        return  res.send(filteredQuery)
-    }
-    res.send(userArray)
-
-
-})
+// app.get('/api/user')
 
 
 
@@ -154,7 +134,6 @@ app.delete('/api/user/:id',(req,res) => {
 
     userArray.splice(id,1)
     return res.sendStatus(200)
-
 
 } )
 
